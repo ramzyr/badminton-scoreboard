@@ -1,74 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Badminton Scoreboard</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      background: #f4f4f4;
-      padding-top: 50px;
-    }
-    h1 {
-      font-size: 2em;
-    }
-    .scoreboard {
-      display: flex;
-      justify-content: center;
-      gap: 50px;
-      margin-top: 20px;
-    }
-    .team {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .score {
-      font-size: 48px;
-      margin: 20px 0;
-    }
-    button {
-      font-size: 20px;
-      padding: 10px;
-      margin: 5px;
-      width: 50px;
-    }
-  </style>
+  <title>Scoreboard Badminton RT</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="header">
+    <img src="logo-rt15.png" alt="Logo RT" class="logo">
+    <div class="title">
+      <h2>POR RW 015 KUTAJAYA PASAR KEMIS</h2>
+      <h3>LAPANGAN PB. GADING RT 08</h3>
+    </div>
+    <img src="logo-rt08.png" alt="Logo RT" class="logo">
+  </div>
 
-  <h1>Badminton Scoreboard</h1>
-
-  <div class="scoreboard">
+  <div class="teams">
     <div class="team">
-      <h2>Player A</h2>
-      <div class="score" id="scoreA">0</div>
-      <button onclick="changeScore('A', 1)">+</button>
-      <button onclick="changeScore('A', -1)">-</button>
+      <div class="team-label">RT 008</div>
+      <div class="players">
+        <div>AGUS H</div>
+        <div>DIKUN SO</div>
+      </div>
+    </div>
+
+    <div class="game-info">
+      <div class="game-set" id="babak">BABAK</div>
+      <div class="set-score">
+        <div id="setA">0</div>
+        <div id="setB">0</div>
+      </div>
     </div>
 
     <div class="team">
-      <h2>Player B</h2>
-      <div class="score" id="scoreB">0</div>
-      <button onclick="changeScore('B', 1)">+</button>
-      <button onclick="changeScore('B', -1)">-</button>
+      <div class="team-label">RT 002</div>
+      <div class="players">
+        <div>DIKY</div>
+        <div>ENGGAR</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scoreboard">
+    <div class="controls">
+      <button onclick="updateScore('A', 1)">⬆</button>
+      <button onclick="resetScore('A')">↩</button>
+      <button onclick="updateScore('A', -1)">⬇</button>
+    </div>
+
+    <div class="score" id="scoreA">0</div>
+    <div class="divider">✕</div>
+    <div class="score" id="scoreB">0</div>
+
+    <div class="controls">
+      <button onclick="updateScore('B', 1)">⬆</button>
+      <button onclick="resetScore('B')">↪</button>
+      <button onclick="updateScore('B', -1)">⬇</button>
     </div>
   </div>
 
   <script>
-    let scoreA = 0;
-    let scoreB = 0;
+    let scoreA = 0, scoreB = 0;
 
-    function changeScore(player, value) {
-      if (player === 'A') {
-        scoreA = Math.max(0, scoreA + value);
+    function updateScore(team, change) {
+      if (team === 'A') {
+        scoreA = Math.max(0, scoreA + change);
         document.getElementById('scoreA').innerText = scoreA;
       } else {
-        scoreB = Math.max(0, scoreB + value);
+        scoreB = Math.max(0, scoreB + change);
         document.getElementById('scoreB').innerText = scoreB;
       }
+    }
+
+    function resetScore(team) {
+      if (team === 'A') scoreA = 0;
+      else scoreB = 0;
+      updateScore(team, 0);
     }
   </script>
 </body>
